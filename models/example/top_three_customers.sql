@@ -33,11 +33,12 @@ customer_orders as(
 
 final as( 
     SELECT 
-    full_name, 
-    amount
+    full_name,
+    sum(amount) as total_purchase
     from customer_orders
     join payments using(order_id)
-    order by amount desc
+    group by 1
+    order by 2 desc
     limit 3
     )
 
